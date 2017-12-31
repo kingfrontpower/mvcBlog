@@ -36,7 +36,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ><a href="/">Home </a></li>
+                        <li ><a href="index.php">Home </a></li>
                         <li ><a href="about">About</a></li>
                         <li class="active"><a href="contact">Contact</a></li>
                     </ul>
@@ -72,13 +72,20 @@
                     <form action="" >
                         <div class="form-group">
                             <label name="email">Email:</label>
-                            <input type="email" name='email' class='form-control'>
+                            <input type="email" name='email' id="email" class='form-control'>
                         </div>
                         
                         <div class="form-group">
-                            <label name="email">Email:</label>
-                            <input type="email" name='email' class='form-control'>
+                            <label name="subject">Subject:</label>
+                            <input type="subject" name='subject' id="subject" class='form-control'>
                         </div>
+                        
+                        <div class="form-group">
+                            <label name="message">message:</label>
+                            <textarea type="text" name='message' id="message" class='form-control' placeholder='Type your message here...'></textarea>
+                        </div>
+                        
+                        <input type="submit" value='Send Message' class="btn btn-success">
 
 
 
