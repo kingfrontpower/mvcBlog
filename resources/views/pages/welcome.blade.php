@@ -1,5 +1,7 @@
 @extends('main')
 
+@section('title',' | Home Page')
+
 @section('myStyleSheet')
 <style>
 /*
