@@ -9,8 +9,9 @@
 
             @yield('content')
 
+            <hr />
         </div><!-- end of container -->
-        <hr />
+
 
         @include('partials._footer')
 
