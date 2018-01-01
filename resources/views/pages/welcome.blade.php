@@ -1,4 +1,15 @@
 @extends('main')
+
+@section('myStyleSheet')
+<style>
+/*
+    .test{
+        color: white;
+    }
+*/
+</style>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -50,4 +61,11 @@
 </div>
 
 @endsection
+
+@section('myJavaScript')
+<script>
+//confirm('js is ran on this page!');
+</script>
+@endsection
+
 
