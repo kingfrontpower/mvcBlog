@@ -17,7 +17,10 @@ class PagesController extends Controller{
         $myemail="kingfrontpower@gamil.com";
         $myData=[];
         $myData['fullName']=$fullname;
-        $myData["myEmail"]=$myemail;        
+        $myData["myEmail"]=$myemail;  
+        
+        //return view('pages.about')->with('mydata',$myData);
+        
         return view('pages.about')->withMydata($myData);
     }
     
