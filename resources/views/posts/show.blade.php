@@ -2,8 +2,9 @@
 
 @section('title','|View Posts')
 
-@section('contect')
+@section('content')
 
- <p class='lead'>this is a view posts page!</p>
+<h1>{{ $post->title }}</h1>
+<p>{{ $post->body }}</p>
 
 @endsection
