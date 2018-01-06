@@ -27,7 +27,11 @@
 
                 </div>
                 <div class="col-sm-6">
-                    {!! Html::linkRoute('posts.destroy','刪除',array($post->id),array('class'=>'btn btn-danger btn-block')) !!}
+
+                    {!! Form::open(['route' => ['posts.destroy',$post->id],'method'=>'DELETE']) !!}
+
+                    {!! Form::submit('刪除',array('class'=>'btn btn-danger btn-block'))!!}
+                    {!! Form::close() !!}
 
                 </div>
             </div>
