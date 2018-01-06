@@ -5,15 +5,16 @@
 @section('content')
 
 <div class="row">
-   {!! Form::model($post, ['route' => ['posts.update', $post->id]]) !!}
+    {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'put']) !!}
+    <!-- 假如form::mode少了 , 'method' => 'put' ,將會出現 MethodNotAllowedHttpException -->
     <div class="col-md-8">
-       {{ Form::label('title', '標題:') }}
-       {{ Form::text('title',null,['class' => 'form-control input-lg'] ) }}
-       
-       {{ Form::label('body', '內文:', ['class' => 'form-spacing-top']) }}
-       {{ Form::textarea('body',null,['class' => 'form-control'] ) }}
-        
-        
+        {{ Form::label('title', '標題:') }}
+        {{ Form::text('title',null,['class' => 'form-control input-lg'] ) }}
+
+        {{ Form::label('body', '內文:', ['class' => 'form-spacing-top']) }}
+        {{ Form::textarea('body',null,['class' => 'form-control'] ) }}
+
+
     </div>
     <div class="col-md-4">
         <div class="well">
@@ -29,17 +30,18 @@
             <hr />
             <div class="row">
                 <div class="col-sm-6">
-                    {!! Html::linkRoute('posts.edit','儲存',array($post->id),array('class'=>'btn btn-success btn-block')) !!}
+                    {{ Form::submit('儲存',array('class'=>'btn btn-success btn-block'))  }}
 
                 </div>
                 <div class="col-sm-6">
-                    {!! Html::linkRoute('posts.show','取消',array($post->id),array('class'=>'btn btn-danger btn-block')) !!}
+
+                    {!! Html::linkRoute('posts.show','取消',array($post->id),['class'=>'btn btn-danger btn-block']) !!}
 
                 </div>
             </div>
         </div>
     </div>
-       {!! Form::close() !!}
+    {!! Form::close() !!}
 </div>
 
 
