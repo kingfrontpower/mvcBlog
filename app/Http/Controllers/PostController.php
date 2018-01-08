@@ -18,7 +18,8 @@ class PostController extends Controller
     public function index()
     {
         //create a variable and store all the blog pasts in it frome the database 
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::orderBy('id','DESC')->paginate(2);
 
         //return a view and pass in the above variable
 
@@ -138,7 +139,6 @@ class PostController extends Controller
         $post = Post::find($id);
         
         $post->delete();
-
 
         // set flash data with success message 
         Session::flash('success', '文章己刪除!');
