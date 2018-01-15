@@ -24,6 +24,7 @@ class PostController extends Controller
         //return a view and pass in the above variable
 
         return view('posts.index')->withPosts($posts);
+        //return view('posts.index');
     }
 
     /**

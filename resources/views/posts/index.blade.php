@@ -29,7 +29,6 @@
                 <th></th>               
             </thead>
             <tbody>
-
                 @foreach($posts->all() as $post)
                 <tr>
                     <th>{{ $post->id }}</th>
@@ -38,13 +37,12 @@
                     <td>{{ date('M j, Y h:ia',strtotime($post->created_at)) }}</td>
                     <td><a href="{{ route('posts.show', $post->id) }}" class='btn btn-default btn-sm'>檢視</a>&nbsp;<a href="{{ route('posts.edit', $post->id) }}" class='btn btn-default btn-sm'>編輯</a></td>                
                 </tr>
-
                 @endforeach
 
             </tbody>
         </table> 
         <div class="text-center">
-            {!! $posts->links(); !!}
+            {{ $posts->links() }}
         </div>      
     </div>    
 </div>

@@ -25,14 +25,21 @@
                 <div class="col-sm-6">
                     {!! Html::linkRoute('posts.edit','編輯',array($post->id),array('class'=>'btn btn-primary btn-block')) !!}
 
+
                 </div>
                 <div class="col-sm-6">
+
 
                     {!! Form::open(['route' => ['posts.destroy',$post->id],'method'=>'DELETE']) !!}
 
                     {!! Form::submit('刪除',array('class'=>'btn btn-danger btn-block'))!!}
                     {!! Form::close() !!}
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ Html::linkRoute('posts.index','<< 所有文章', [] ,['class' => 'btn btn-default btn-block btn-h1-spacing']) }}
                 </div>
             </div>
         </div>
