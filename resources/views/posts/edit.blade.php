@@ -10,6 +10,9 @@
     <div class="col-md-8">
         {{ Form::label('title', '標題:') }}
         {{ Form::text('title',null,['class' => 'form-control input-lg'] ) }}
+        
+        {{ Form::label('slug', 'Slug:', ['class' => 'form-spacing-top']) }}
+        {{ Form::text('slug',null,['class' => 'form-control'] ) }}
 
         {{ Form::label('body', '內文:', ['class' => 'form-spacing-top']) }}
         {{ Form::textarea('body',null,['class' => 'form-control'] ) }}
