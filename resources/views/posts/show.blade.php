@@ -13,7 +13,7 @@
         <div class="well">
             <dl class='dl-horizontal'>
                 <lable>Url:</lable>
-                <p><a href="{{ url($post->slug) }}">{{ $post->slug }}</a></p>
+                <p><a href="{{ route('blog.single',$post->slug) }}">{{ $post->slug }}</a></p>
             </dl>
 
             <dl class='dl-horizontal'>
