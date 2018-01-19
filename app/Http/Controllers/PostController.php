@@ -109,15 +109,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $post = Post::find($id);
         //validate the data
+        //若slug沒有變動,就不用檢查.
+        if($request->slug==$post->slug){
+            $uniqueSlug="";
+        }else{
+            $uniqueSlug="|unique:posts,slug";
+        }
+
         $this->validate($request, array(
             'title' => 'required|max:255',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'slug' => "required|alpha_dash|min:5|max:255$uniqueSlug",
             'body' => 'required'            
         ));
 
         // Save the data to the database
-        $post = Post::find($id);
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
@@ -142,14 +149,14 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        
+
         $post->delete();
 
         // set flash data with success message 
         Session::flash('success', '文章己刪除!');
-        
+
         return redirect()->route('posts.index');
 
-        
+
     }
 }
