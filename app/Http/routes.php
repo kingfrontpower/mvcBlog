@@ -11,7 +11,9 @@
 |
 */
 //Route也可用regular express檢查
-Route::get('blog/{slug}',['as' =>'blog.single','uses' =>'BlogController@getSingle'])->where('slug','[\w\d\-\_]+');
+Route::get('blog/{slug}',['uses' =>'BlogController@getSingle','as' =>'blog.single'])->where('slug','[\w\d\-\_]+');
+
+Route::get('blog',['uses'=>'BlogController@getIndex','as'=>'blog.index']);
 
 Route::get('contact', "PagesController@getContact");
 
