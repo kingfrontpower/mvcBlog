@@ -19,7 +19,7 @@ class PostController extends Controller
     {
         //create a variable and store all the blog pasts in it frome the database 
         //$posts = Post::all();
-        $posts = Post::orderBy('id','DESC')->paginate(2);
+        $posts = Post::orderBy('id','DESC')->paginate(3);
 
         //return a view and pass in the above variable
 
