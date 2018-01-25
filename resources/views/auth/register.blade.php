@@ -1,8 +1,6 @@
 @extends('main')
 
-
 @section('title', '| Register')
-
 
 @section('content')
 
@@ -25,7 +23,6 @@
 
    
         {{ Form::submit('註冊',['class' => 'btn btn-primary btn-block form-spacing-top'])  }}
-
 
         {!! Form::close() !!}
     </div>
