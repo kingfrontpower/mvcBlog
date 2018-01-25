@@ -10,7 +10,7 @@
 
            @include('partials._messages')
            
-           {{ Auth::check() ? 'Login' : 'Logout'}}
+
            
             @yield('content')
 

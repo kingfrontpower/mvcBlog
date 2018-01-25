@@ -7,6 +7,10 @@ body{
 
 }
 
+.nav-btn-spacing{
+    margin-top: 8px;
+}
+
 .form-spacing-top {
     margin-top: 30px;
 

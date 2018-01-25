@@ -10,10 +10,11 @@ use Session;
 
 class PostController extends Controller
 {
-    
+
     public function __construct()
     {
         //        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        //這是利用middleware來檢查登入的人是否有經過認證,若無則return->轉址到登入頁面.
         $this->middleware('auth');
     }
     /**
