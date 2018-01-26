@@ -17,8 +17,14 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', ['uses'=>'Auth\AuthController@getLogout','as'=>'logout']);
 
 //Registration Routes
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::get('auth/register',['as'=>'register','uses'=>'Auth\AuthController@getRegister'] );
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+// ResetPassWord Routes
+Route::get('password/reset/{token?}','Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+Route::post('password/reset','Auth\PasswordController@reset');
+
 
 //Route也可用regular express檢查
 Route::get('blog/{slug}',['uses' =>'BlogController@getSingle','as' =>'blog.single'])->where('slug','[\w\d\-\_]+');

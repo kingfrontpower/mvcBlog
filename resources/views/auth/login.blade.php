@@ -1,8 +1,6 @@
 @extends('main')
 
-
 @section('title', '| Login')
-
 
 @section('content')
 
@@ -12,7 +10,7 @@
 
         {{ Form::label('email','電子郵件:') }}
         {{ Form::email('email',null,['class'=>'form-control']) }}
-<!--         <br />-->
+        <!--         <br />-->
 
         {{ Form::label('password','密碼:')}}
         {{ Form::password('password',['class'=>'form-control']) }}
@@ -28,6 +26,16 @@
 
 
         {!! Form::close() !!}
+
+    </div>
+
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <br />
+        <br />
+        <a href="{{ route('register') }}">尚未註冊 | 免費加入會員</a>
+      <br />
+      
+        <a href="{{ url('password/reset') }}">重設密碼</a>
     </div>
 </div>
 
