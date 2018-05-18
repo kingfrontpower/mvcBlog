@@ -32,8 +32,5 @@ class PasswordController extends Controller
         $this->middleware('guest');
     }
     
-//    public function rest(){
-//    return "rest ok";
-//        //return view('auth/passwords/rest');
-//    }
+ 
 }

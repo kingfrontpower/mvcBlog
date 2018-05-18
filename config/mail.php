@@ -56,7 +56,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'kingfrontpower@gmail.com', 'name' => 'kingfrontpower'],
+    'from' => ['address' => 'kingfrontpower@gmail.com', 'name' => '權宜文創工作室'],
 
     /*
     |--------------------------------------------------------------------------

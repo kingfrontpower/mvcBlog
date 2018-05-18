@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
-            <div class="panel-heading">請輸入註冊時的密碼</div>
+            <div class="panel-heading">請輸入新的密碼</div>
             <div class="panel-body">
                 {!! Form::open(['url'=>'password/reset','method'=>'POST']) !!}
 
