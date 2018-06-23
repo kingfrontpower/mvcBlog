@@ -11,7 +11,20 @@
 |
 */
 
-Route::get('sfc_010501', ['as'=>'basic','uses'=>'BasicController@getIndex']);
+
+Route::get('contact',  ['as'=>'contact','uses'=>'PagesController@getContact']);
+
+Route::get('about',  ['as'=>'about','uses'=>'PagesController@getAbout']);
+
+Route::get('/',  ['as'=>'home','uses'=>'PagesController@getIndex']);
+
+
+//沒有會員的訂購單, 顯示flash提示, 重整後消失
+
+Route::get('orderIndexNoLogin', ['as'=>'orderIndexNoLogin','uses'=>'OrderController@orderIndexNoLogin']);
+
+
+
 //Authentication Routes
 Route::get('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@getLogin']);
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -32,11 +45,9 @@ Route::get('blog/{slug}',['uses' =>'BlogController@getSingle','as' =>'blog.singl
 
 Route::get('blog',['uses'=>'BlogController@getIndex','as'=>'blog.index']);
 
-Route::get('contact', "PagesController@getContact");
-
-Route::get('about', "PagesController@getAbout");
-
-Route::get('/', "PagesController@getIndex");
 
 Route::resource('posts','PostController');
+Route::resource('orders','OrderController');
+
+
 

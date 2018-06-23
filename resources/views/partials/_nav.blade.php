@@ -1,5 +1,6 @@
 <!--       bootstrap basic nav-->
-<nav class="navbar navbar-default">
+<!--<nav class="navbar navbar-default">-->
+<nav class="navbar navbar-custom">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -9,16 +10,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Laravel Blog</a>
+            <a class="navbar-brand" href="{{ route('home') }}"><span style="color: black;"><strong>官人我要</strong></span></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('/') ? 'active' : ''  }}"><a href="{{ url('/')}}">Home</a></li>
-                <li class="{{ Request::is('blog') ? 'active' : ''  }}"><a href="blog">Blog</a></li>
-                <li class="{{ Request::is('about') ? 'active' : ''  }}"><a href="about">About</a></li>
-                <li class="{{ Request::is('contact') ? 'active' : ''  }}"><a href="contact">Contact</a></li>
+                <li class="{{ Request::is('/') ? 'active' : ''  }}"><a href="{{ route('home') }}">Home</a></li>
+
+                @if(Auth::check())
+                <li><a href="{{ route('orders.index')}}">檢視訂單</a></li>
+
+                @endif 
+
+
+                <!--
+<li class="{{ Request::is('blog') ? 'active' : ''  }}"><a href="{{ route('blog.index')}}">Blog</a></li>
+<li class="{{ Request::is('about') ? 'active' : ''  }}"><a href="{{ route('about')}}">About</a></li>
+<li class="{{ Request::is('contact') ? 'active' : ''  }}"><a href="{{ route('contact')}}">Contact</a></li>
+-->
             </ul>
             <!--
 <form class="navbar-form navbar-left">
@@ -35,10 +45,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{ Auth::user()->name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('posts.index')}}">Posts</a></li>
+                        <!--                        <li><a href="{{ route('posts.index')}}">Posts</a></li>-->
 
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{ route('logout')}}">Logout</a></li>
+                        <li><a href="{{ route('logout')}}">登出</a></li>
                     </ul>
                 </li>
 

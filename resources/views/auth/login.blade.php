@@ -2,10 +2,30 @@
 
 @section('title', '| Login')
 
+@section('myStyleSheet')
+<style>
+/*
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+*/
+    .myCoverPearImg {  
+        width:100%;
+    }
+</style>
+@endsection
+
+
 @section('content')
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-9">
+        <img class="myCoverPearImg" src="{{url('/')}}/images/pear_07.jpg" alt="首頁照片">
+    </div>
+    <div class="col-md-3 ">
         {!! Form::open() !!}
 
         {{ Form::label('email','電子郵件:') }}
@@ -26,16 +46,17 @@
 
 
         {!! Form::close() !!}
+        <br />
+        <a  class="btn btn-warning btn-block" href="{{ route('register') }}" style="color:#222;">尚未註冊 | 免費加入會員</a>
+        <br />
+
+        <a class="btn btn-warning  btn-block" href="{{ url('password/reset') }}" style="color:#222;">重設密碼</a>
 
     </div>
 
     <div class="col-md-6 col-md-offset-3 text-center">
         <br />
-        <br />
-        <a href="{{ route('register') }}">尚未註冊 | 免費加入會員</a>
-      <br />
-      
-        <a href="{{ url('password/reset') }}">重設密碼</a>
+        
     </div>
 </div>
 

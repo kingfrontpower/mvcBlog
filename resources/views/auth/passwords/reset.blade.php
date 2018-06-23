@@ -2,6 +2,17 @@
 
 @section('title','| 重設密碼')
 
+@section('myStyleSheet')
+<style>
+    footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <div class="row">

@@ -9,10 +9,11 @@ class PagesController extends Controller{
         // receive back from the model
         // compile or process data from the model if needed 
         // pass that data to the correct view
-        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+//        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
 
 
-        return view('pages.welcome')->withPosts($posts);
+//        return view('pages.welcome')->withPosts($posts);
+        return view('pages.welcome');
 
     }
 
