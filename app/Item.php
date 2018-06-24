@@ -10,4 +10,8 @@ class Item extends Model
 //    {
 //        return $this->belongsTo('App\Order');
 //    }
+    /**
+     *自訂table 
+     */
+    protected $table= 'items'; 
 }

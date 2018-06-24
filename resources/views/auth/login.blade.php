@@ -28,8 +28,8 @@
     <div class="col-md-3 ">
         {!! Form::open() !!}
 
-        {{ Form::label('email','電子郵件:') }}
-        {{ Form::email('email',null,['class'=>'form-control']) }}
+        {{ Form::label('email','帳號:') }}
+        {{ Form::email('email',null,['class'=>'form-control','placeholder'=>'請輸入電子郵件,例如:abc@gmail.com',]) }}
         <!--         <br />-->
 
         {{ Form::label('password','密碼:')}}
@@ -47,10 +47,10 @@
 
         {!! Form::close() !!}
         <br />
-        <a  class="btn btn-warning btn-block" href="{{ route('register') }}" style="color:#222;">尚未註冊 | 免費加入會員</a>
+        <a  class="btn btn-success btn-block" href="{{ route('register') }}" style="color:#222;">尚未註冊 | 免費加入會員</a>
         <br />
 
-        <a class="btn btn-warning  btn-block" href="{{ url('password/reset') }}" style="color:#222;">重設密碼</a>
+        <a class="btn btn-success  btn-block" href="{{ url('password/reset') }}" style="color:#222;">重設密碼</a>
 
     </div>
 

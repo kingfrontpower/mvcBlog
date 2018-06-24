@@ -45,6 +45,9 @@ Route::get('blog/{slug}',['uses' =>'BlogController@getSingle','as' =>'blog.singl
 
 Route::get('blog',['uses'=>'BlogController@getIndex','as'=>'blog.index']);
 
+Route::get('service_orders',['uses'=>'OrderController@service_orders','as'=>'service_orders']);
+Route::get('service_items',['uses'=>'OrderController@service_items','as'=>'service_items']);
+
 
 Route::resource('posts','PostController');
 Route::resource('orders','OrderController');

@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title',' | 顯示訂單')
+@section('title',' | 管理員的訂單')
 
 @section('myStyleSheet')
 <style>
@@ -43,7 +43,13 @@
         $("#gridContainer").dxDataGrid({     
             dataSource: DevExpress.data.AspNet.createStore({
                 key: "id",
-                loadUrl: url ,                
+                loadUrl: url ,
+                //            insertUrl: url + "/InsertOrder",
+                //            updateUrl: url + "/UpdateOrder",
+                //            deleteUrl: url + "/DeleteOrder",
+                //            onBeforeSend: function(method, ajaxOptions) {
+                //                ajaxOptions.xhrFields = { withCredentials: true };
+                //            }
             }),
             paging: {
                 pageSize: 5
@@ -55,7 +61,20 @@
                 showInfo: true,
                 infoText:'第 {0} 頁 , 共 {1} 頁 （共 {2} 筆）',
                 visible:true,
-            },columns: [{
+            },
+            //            export: {
+            //                enabled: true,
+            //                //            fileName: "frDataSource",
+            //                fileName: fileNameAndDate,
+            //                allowExportSelectedData: true,           
+            //                texts:{
+            //                    exportAll:"匯出全部資料",
+            //                    //                    exportSelectedRows:"選取部分資料",
+            //                    exportTo:"匯出EXCEL",
+            //                },
+            //            },
+
+            columns: [{
                 dataField: "id",
                 caption: "訂單序號",  
                 visible: false,
@@ -67,6 +86,7 @@
                 dataField: "order_user_id",
                 caption: "訂購會員",
                 visible: false,
+                //                      columnHidingEnabled: false,
             }, { 
                 dataField: "order_user_name",
                 caption: "收件人姓名",
@@ -89,7 +109,7 @@
                 caption: "訂單編號",
                 visible:false,
             }, 
-                       ],
+                     ],
 
             headerFilter: {
                 visible: true
@@ -107,7 +127,12 @@
                     var service_items=DevExpress.data.AspNet.createStore({
                         key: "id",
                         loadUrl: load_url ,
-
+                        //            insertUrl: url + "/InsertOrder",
+                        //            updateUrl: url + "/UpdateOrder",
+                        //            deleteUrl: url + "/DeleteOrder",
+                        //            onBeforeSend: function(method, ajaxOptions) {
+                        //                ajaxOptions.xhrFields = { withCredentials: true };
+                        //            }
                     });
 
                     $("<div>")
@@ -155,20 +180,12 @@
                             visible: false,
 
                         },        ],
-                        summary: {
-                            totalItems: [{
-                                column: "quantity",
-                                summaryType: "sum",
-
-                            },{
-                                column: "price",
-                                summaryType: "sum",
-                                valueFormat: "currency"
-                            },
-
-
-                                        ]
-                        }
+                        //        filterRow: {
+                        //            visible: true
+                        //        },
+                        //                    headerFilter: {
+                        //                        visible: true
+                        //                    },
 
                     }).appendTo(container);
 
