@@ -4,23 +4,19 @@
 
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title>官人我要 @yield('title')</title> <!--CHANG THIS TITLE FOR EACH PAGE-->
+<!--favicon icon  -->
+<link rel='icon' type='image/png' href='images/pear.png' />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery-3.1.0.min.js"%3E%3C/script%3E'))</script>
+
+@yield('cdnDevextreme')
+
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.spa.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.common.css" />
-<link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/18.1.3/css/dx.light.css" />
-<script src="https://cdn3.devexpress.com/jslib/18.1.3/js/dx.all.js"></script>
-
-
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/devextreme-aspnet-data@1.3.0/js/dx.aspnet.data.min.js"></script>
 
 
 <!-- Latest compiled JavaScript -->

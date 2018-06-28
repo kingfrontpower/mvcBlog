@@ -9,10 +9,10 @@ class PagesController extends Controller{
         // receive back from the model
         // compile or process data from the model if needed 
         // pass that data to the correct view
-//        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+        //        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
 
 
-//        return view('pages.welcome')->withPosts($posts);
+        //        return view('pages.welcome')->withPosts($posts);
         return view('pages.welcome');
 
     }
@@ -36,6 +36,12 @@ class PagesController extends Controller{
     }
     public function postContact(){
 
+    }
+
+    public function orderIndexNoLogin()
+    {
+        //沒有會員的訂單 顯示內容
+        return view("orders.orderIndexNoLogin");
     }
 
 }

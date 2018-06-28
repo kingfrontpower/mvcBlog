@@ -16,14 +16,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('/') ? 'active' : ''  }}"><a href="{{ route('home') }}">Home</a></li>
+                <li class="{{ Request::is('/') ? 'active' : ''  }}"><a href="{{ route('home') }}"><span class="glyphicon glyphicon-home"></span>&nbsp;商品首頁</a></li>
 
-                @if(Auth::check())
-                <li><a href="{{ route('orders.index')}}">檢視訂單</a></li>
-
+                @if (Auth::check())
+                <li><a href="{{ route('getOrderIndex')}}"><span class="glyphicon glyphicon-leaf"></span>&nbsp;檢視訂單</a></li> 
                 @endif 
-
-
+                @if( isset(Auth::user()->level) && (Auth::user()->level=="admin" || Auth::user()->level=="SP") )
+                <li><a href="{{ route('orderAdmin')}}"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;大梨出貨單</a>
+                </li><li><a href="{{ route('getTotalOrderAdmin')}}"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;管理員訂單總覽</a></li>  
+                @endif
                 <!--
 <li class="{{ Request::is('blog') ? 'active' : ''  }}"><a href="{{ route('blog.index')}}">Blog</a></li>
 <li class="{{ Request::is('about') ? 'active' : ''  }}"><a href="{{ route('about')}}">About</a></li>
@@ -43,11 +44,9 @@
 
                 @if(Auth::check())
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{ Auth::user()->name }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;Hello {{ Auth::user()->name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <!--                        <li><a href="{{ route('posts.index')}}">Posts</a></li>-->
 
-                        <li role="separator" class="divider"></li>
                         <li><a href="{{ route('logout')}}">登出</a></li>
                     </ul>
                 </li>

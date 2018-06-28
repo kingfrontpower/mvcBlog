@@ -15,11 +15,13 @@
 
 
 @section('content')
+<div class="container"> 
+    <div class="row">
+        <div class="col-md-12 my-background-color" >       
 
-<div class="row">
-    <div class="col-md-12 my-background-color" >       
-
+        </div>    
     </div>    
+</div>    
 
 
 

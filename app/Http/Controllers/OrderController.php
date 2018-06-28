@@ -27,7 +27,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $thisUserId=Auth::user()->id;
+        return "this is order.index";
+    }
+
+    public function getOrderIndex()
+    {
+
         return view('orders.index');
 
     }
@@ -91,7 +96,6 @@ class OrderController extends Controller
         $order->order_user_name = $request->order_user_name;
         $order->telphone = $request->telphone;
         $order->addr = $request->addr;
-
         $order->message_board = $request->message_board;
         $order->order_user_id = $request->order_user_id;
         //rowid=年月日時分秒.user_id.telphone
@@ -99,13 +103,17 @@ class OrderController extends Controller
         $order->created_at = $request->created_at;
 
         $order->save();
-        if($quantity_total<=1) {$addTransFee=100;}
+
         for($i=0;$i<=2;$i++){
+
             if($quantity_array[$i] >0){
+                //若是訂單總量只訂一盒,加運費100元
+                if($quantity_array[$i]==1 && $quantity_total<=1){$addTransFee=100;}
+
                 $item = new Item;
                 $item->order_level = $myLevel[$i];
                 $item->quantity = $quantity_array[$i];
-                $item->price = $level_price_array[$i] * $quantity_array[$i];
+                $item->price = (($level_price_array[$i] * $quantity_array[$i]) + $addTransFee);
                 $item->box = $request->box;
                 $item->order_id = trim($request->order_id)."_".trim($request->telphone);
                 $item->created_at = $request->created_at;
@@ -136,7 +144,7 @@ class OrderController extends Controller
         if(Auth::check()){
             Session::flash('success', '感謝您，您已成功填寫訂購單!');      
             //redirect to another page
-            return redirect()->route('orders.index', $order->id); 
+            return redirect()->route('getOrderIndex'); 
         }else{
             Session::flash('success', $mymessage); 
             return redirect()->route('orderIndexNoLogin');
@@ -152,24 +160,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //        $order_query="SELECT a.*,b.order_level,b.quantity ,b.price ";
-        //        $order_query.="FROM items b, orders a ";
-        //        $order_query.="where a.created_at=b.created_at ";
-        //        $order_query.="and a.order_id = b.order_id ";
-        //        $order_query.="and a.id= ".$id;        
-
-        $order = Order::find($id); 
-        $order_id=$order->order_id;
-        //        $item = Item::where('rando_no',$order->rando_no)->where('created_at',$order->created_at)->orderBy('created_at', 'desc')->get(); 
-
-        //         $thisUserId=Auth::user()->id;
-        $order_query="SELECT * from items a 
-left JOIN orders b on a.order_id = CONVERT(b.order_id USING utf8) COLLATE utf8_unicode_ci ";
-        $order_query.="where a.id=".$order_id;
-        $orders = DB::select($order_query); 
-
-        return  $order;
-        exit;
+        return "this is show page.";
         //        return view('orders.show')->withOrder($order);
     }
 
@@ -207,17 +198,20 @@ left JOIN orders b on a.order_id = CONVERT(b.order_id USING utf8) COLLATE utf8_u
         //
     }
 
-    public function orderIndexNoLogin()
-    {
-        return view("orders.orderIndexNoLogin");
-    }
+
 
     public function service_orders()
     {
         $thisUserId=Auth::user()->id;
-        $orders_query="SELECT a.*";
-        $orders_query.="FROM  orders a   ";        
-        $orders_query.="where a.order_user_id=' ".$thisUserId."' ";
+        $openThisOrder=" where a.order_user_id=".$thisUserId;
+        $userLevel=Auth::user()->level;
+        if($userLevel=="admin" || $userLevel=="SP"){
+            $openThisOrder="";
+        }
+
+        $orders_query="SELECT a.*,DATE_FORMAT(created_at,'%Y-%m-%d')order_date ";
+        $orders_query.="FROM  orders a  ";        
+        $orders_query.= $openThisOrder;
         $orders = DB::select($orders_query);
         return $orders;
     }
@@ -228,6 +222,121 @@ left JOIN orders b on a.order_id = CONVERT(b.order_id USING utf8) COLLATE utf8_u
         $items_query="SELECT * FROM  items  ";
         $items = DB::select($items_query);
         return $items;
+    }
+
+    public function orderAdmin()
+    {
+
+        return view("orders.orderAdmin");
+
+    }
+    public function orderAdminService()
+    {
+        $userLevel=Auth::user()->level;
+        if($userLevel==""){
+            Session::flash('danger', '權限不足,無法登入此頁,請聯絡系統管理員.');
+            //redirect to another page
+            return redirect()->route('home'); 
+        }
+
+        //        $orders=DB::table('orders')->orderBy('created_at', 'desc')->get(); 
+
+        $orders_query="SELECT "; 
+        $orders_query.="a.*,sum(b.price)total_price, ";
+        $orders_query.="sum(b.quantity)total_quantity ";
+        $orders_query.="FROM orders a "; 
+        $orders_query.="LEFT JOIN items b on a.order_id=b.order_id   ";
+        $orders_query.="GROUP BY a.id ORDER BY a.created_at DESC ";
+        $orders = DB::select($orders_query);
+
+        $orderArray[0]="";
+        $myIndex=0;
+
+        foreach($orders as $order){
+            $itemString="";
+            $itemIndex=0;
+
+            $items=DB::table('items')->where('order_id','=',$order->order_id)->get();
+
+            foreach($items as $item){
+                $itemIndex+=1;
+                $itemString.="＊＊＊項目".$itemIndex."內容:_".$item->order_level.",數量:_".$item->quantity.",價格:_".$item->price.",".$item->box."；";
+            }
+            $makeOrderArray=array("id"=>$order->id,
+                                  "order_user_id"=>$order->order_user_id,
+                                  "order_user_name"=>$order->order_user_name,
+                                  "telphone"=>$order->telphone, 
+                                  "addr"=>$order->addr,
+                                  "paid"=>$order->paid,
+                                  "shipping"=>$order->shipping,
+                                  "created_at"=>$order->created_at,
+                                  "order_date"=>date("Y-m-d", strtotime($order->created_at)),
+                                  "updated_at"=>$order->updated_at,
+                                  "message_board"=>$order->message_board,
+                                  "order_id"=>$order->order_id,"items"=>$itemString );
+            $orderArray[$myIndex]=$makeOrderArray;
+            $myIndex+=1;
+        }
+
+        return $orderArray;
+
+    }
+
+    //訂單總覽
+    public function  getTotalOrderAdmin()
+    {
+        return view("orders.totalOrderAdmin");
+    }
+
+    public function totalOrderAdminService()
+    {
+        $userLevel=Auth::user()->level;
+        if($userLevel==""){
+            Session::flash('danger', '權限不足,無法登入此頁,請聯絡系統管理員.');
+            //redirect to another page
+            return redirect()->route('home'); 
+        }
+
+        //        $orders=DB::table('orders')->orderBy('created_at', 'desc')->get(); 
+
+        $orders_query=" SELECT "; 
+        $orders_query.="a.*,b.order_level,b.quantity,b.price, ";
+        $orders_query.="b.box,b.id as item_id   ";
+        $orders_query.="FROM orders a "; 
+        $orders_query.="LEFT JOIN items b on a.order_id=b.order_id   ";
+        $orders_query.="ORDER BY b.id DESC ";
+        $orders = DB::select($orders_query);
+
+        $orderArray[0]="";
+        $myIndex=0;
+
+        foreach($orders as $order){
+            $itemString="";
+            $itemIndex=0;
+
+            $makeOrderArray=array("id"=>$order->id,
+                                  "item_id"=>$order->item_id,
+                                  "order_user_id"=>$order->order_user_id,
+                                  "order_user_name"=>$order->order_user_name,
+                                  "telphone"=>$order->telphone, 
+                                  "addr"=>$order->addr,
+                                  "paid"=>$order->paid,
+                                  "shipping"=>$order->shipping,
+                                  "created_at"=>$order->created_at,
+                                  "order_date"=>date("Y-m-d", strtotime($order->created_at)),
+                                  "updated_at"=>$order->updated_at,
+                                  "message_board"=>$order->message_board,
+                                  "order_id"=>$order->order_id,
+                                  "level"=>$order->order_level,
+                                  "quantity"=>$order->quantity,
+                                  "price"=>$order->price, 
+                                  "box"=>$order->box );
+            $orderArray[$myIndex]=$makeOrderArray;
+            $myIndex+=1;
+        }
+
+        return $orderArray;
+
     }
 
 

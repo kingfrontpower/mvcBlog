@@ -3,7 +3,7 @@
 @section('title',' | All Posts')
 
 @section('content')
-
+  <div class="container"> 
 <div class="row">
 
     <div class="col-md-10">
@@ -45,6 +45,7 @@
             {{ $posts->links() }}
         </div>      
     </div>    
+</div>
 </div>
 
 

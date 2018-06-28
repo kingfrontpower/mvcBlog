@@ -10,27 +10,34 @@
 </style>
 @endsection
 
+@section('cdnDevextreme')
+
+@include('partials._cdnDevextreme')
+
+@endsection
+
 @section('content')
+<div class="container"> 
+    <div class="row">
+        <div class="col-md-12 my-background-color" >       
+            <table class='table table-striped'>
+                <tr>
+                    <td width='70%' class="dxgrid-header-font"><br/>&nbsp;訂單列表<br/></td>
+                    <td width='30%' class='text-right'>
 
-<div class="row">
-    <div class="col-md-12 my-background-color" >       
-        <table class='table table-striped'>
-            <tr>
-                <td width='70%' class="dxgrid-header-font"><br/>&nbsp;訂單列表<br/></td>
-                <td width='30%' class='text-right'>
-
-                </td>
-            </tr>
-            <tr>
-                <td colspan='2'style="text-align:center;max-width:100px; margin: 0 auto"><div id='gridContainer' ></div></td>
-            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2'style="text-align:center;max-width:100px; margin: 0 auto"><div id='gridContainer' ></div></td>
+                </tr>
 
 
-        </table> 
-        <div class="text-center">
+            </table> 
+            <div class="text-center">
 
-        </div>      
-    </div>    
+            </div>      
+        </div>    
+    </div>
 </div>
 <br>
 
@@ -46,12 +53,12 @@
                 loadUrl: url ,                
             }),
             paging: {
-                pageSize: 5
+                pageSize: 20
             },
             pager: {
                 showPageSizeSelector: true,
                 showNavigationButtons: true,
-                allowedPageSizes: [5, 10, 20],
+                allowedPageSizes: [ 10, 20,50,100,500],
                 showInfo: true,
                 infoText:'第 {0} 頁 , 共 {1} 頁 （共 {2} 筆）',
                 visible:true,
@@ -61,9 +68,11 @@
                 visible: false,
 
             },  { 
-                dataField: "created_at",
+                dataField: "order_date",
                 caption: "訂單日期",
-            },      { 
+                type: "date",
+
+            },  { 
                 dataField: "order_user_id",
                 caption: "訂購會員",
                 visible: false,
@@ -76,6 +85,9 @@
             }, { 
                 dataField: "addr",
                 caption: "收件地址",
+            },{ 
+                dataField: "message_board",
+                caption: "留言板",
             }, { 
                 dataField: "paid",
                 caption: "賣方確認收到款項",
@@ -95,7 +107,7 @@
                 visible: true
             },
 
-            height: 600,
+            //            height: 600,
             showBorders: true,
             //第二層選單
             masterDetail: {

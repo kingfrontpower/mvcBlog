@@ -3,6 +3,7 @@
 @section('title',' | Edit Posts')
 
 @section('content')
+  <div class="container"> 
 
 <div class="row">
     {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'put']) !!}
@@ -45,6 +46,7 @@
         </div>
     </div>
     {!! Form::close() !!}
+</div>
 </div>
 
 
